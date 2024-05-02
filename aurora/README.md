@@ -1,0 +1,1 @@
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/CHAP_Tutorials.WebServerDB.LaunchEC2.html
