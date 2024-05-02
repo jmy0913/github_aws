@@ -9,11 +9,20 @@ style: |
 marp: true
 paginate: true
 ---
-# [AWS IAM](./account.md)
+# [클라우드 컴퓨팅](https://aws.amazon.com/ko/what-is-cloud-computing/)
+- 기존의 물리적인 형태의 실물 컴퓨팅 리소스를 네트워크 기반 서비스 형태로 제공하는 것.
+- 사용자로 하여금 네트워크 상에서 클라우드 서비스의 자원을 사용하는 것을 의미한다.
+
+---
+# AWS
+- 아마존닷컴에서 개발한 클라우드 컴퓨팅 플랫폼이다.
+
+---
+### [AWS IAM](./account.md)
   - AWS 계정 생성
 
 ---
-# [AWS 비용](./billing.md)
+### [AWS 비용](./billing.md)
 - AWS 비용 확인 방법 
 - 프리티어(무료) 
 - aws 비용 알림
@@ -22,14 +31,14 @@ paginate: true
 
 
 ---
-# 필수 서비스들 
+### 필수 서비스들 
 - Amazon EC2
 - Amazon VPC
 - Amazon S3
 - Amazon RDS
 
 ---
-# 자주 사용하는 서비스들
+### 자주 사용하는 서비스들
 - Amazon SQS
 - Amazon CloudFront
 - AWS CloudFormation
@@ -40,13 +49,13 @@ paginate: true
 - AWS CloudTrail 
 
 ---
-# 컨테이너 서비스들
+### 컨테이너 서비스들
 - Amazon EKS
 - Amazon ECS/ECR
 - AWS Fargate
 
 ---
-# Serverless 서비스들 
+### Serverless 서비스들 
 - AWS Lambda
 - Amazon DynamoDB
 - Amazon API Gateway
@@ -57,7 +66,7 @@ paginate: true
 - Amazon CloudFront
 
 ---
-# DevOps/인프라 관리 서비스들 
+### DevOps/인프라 관리 서비스들 
 - AWS IAM
 - AWS CloudFormation
 - AWS CloudTrail
@@ -68,7 +77,7 @@ paginate: true
 - AWS CDK
 
 ---
-# 보안 서비스들 
+### 보안 서비스들 
 - AWS IAM
 - AWS CloudTrail
 - AWS Firewall Manager
@@ -79,7 +88,7 @@ paginate: true
 - AWS Network Firewall
 
 ---
-# 네트워크 서비스들 
+### 네트워크 서비스들 
 - Amazon VPC
 - AWS PrivateLink
 - AWS Transit Gateway
