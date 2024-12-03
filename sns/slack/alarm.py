@@ -27,7 +27,7 @@ def main(p_channel_id:str, p_message:str):
 
 if __name__ == "__main__":
   # 슬렉 채널 아이디 
-  channel_id = SLACK_CHANNELS.C01V5MJUQ3Y.name
+  channel_id = SLACK_CHANNELS.ALARM.value[1]
   # 전달할 메세지 
   message = "Hello World"
   main(p_channel_id=channel_id, p_message=message)

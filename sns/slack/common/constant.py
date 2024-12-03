@@ -6,5 +6,5 @@ class SLACK_TOKENS(enum.Enum):
   SLACK_SIGNING_SECRET = (enum.auto(), "/sns/slack/aws-slack-tutorial/SLACK_SIGNING_SECRET")
 
 class SLACK_CHANNELS(enum.Enum):
-  C01V5MJUQ3Y = (enum.auto(), "일반")
-  C01V9CP9ZU5 = (enum.auto(), "랜덤")
+  ALARM = (enum.auto(), "C083BP1SXPV", "알람")
+  ERROR = (enum.auto(), "C0840KN4H9N", "에러")
