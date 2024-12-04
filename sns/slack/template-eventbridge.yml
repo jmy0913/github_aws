@@ -54,23 +54,6 @@ Resources:
       LayerName: !Sub ${ServiceType}-${DefaultName}-shared-layer
     Metadata:
       BuildMethod: !Sub ${PythonVersion} # Required to have AWS SAM build this layer
-  ##########################################################################
-  #   AWS::Serverless::Function
-  #   https://docs.aws.amazon.com/ko_kr/serverless-application-model/latest/developerguide/sam-resource-function.html
-  #   AWS 알람 람다 
-  ##########################################################################
-  AlarmLambda:
-    Type: AWS::Serverless::Function
-    DependsOn:
-      - SharedLayer
-    Properties:
-      FunctionName:  !Sub ${ServiceType}-${DefaultName}-alarm-lambda
-      Role: !GetAtt LambdaRole.Arn
-      CodeUri: lambda/alarm
-      Handler: app.lambda_handler
-      Tags:
-        Name: !Sub ${ServiceType}-${DefaultName}-alarm-lambda
-        Service: !Sub ${ServiceType}
   ########################################################################## 
   #   AWS::Serverless::Function
   #   https://docs.aws.amazon.com/ko_kr/serverless-application-model/latest/developerguide/sam-resource-function.html

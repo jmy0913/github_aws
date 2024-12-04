@@ -61,8 +61,6 @@ Resources:
   ##########################################################################
   AlarmLambda:
     Type: AWS::Serverless::Function
-    DependsOn:
-      - SharedLayer
     Properties:
       FunctionName:  !Sub ${ServiceType}-${DefaultName}-alarm-lambda
       Role: !GetAtt LambdaRole.Arn
@@ -125,35 +123,6 @@ Resources:
       Roles:
         - !Ref LambdaRole
 
-  ##########################################################################
-  #   AWS::Events::Rule
-  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html
-  ##########################################################################
-  EventBridgeScheduleRule:
-    Type: AWS::Events::Rule
-    Properties:
-      Description: >
-        EventBridge Schedule Sample
-      Name: !Sub ${ServiceType}-${DefaultName}-events-rules
-      #   https://docs.aws.amazon.com/ko_kr/eventbridge/latest/userguide/eb-create-rule-schedule.html
-      ScheduleExpression: cron(0/1 * * * ? *) # 1분마다 실행
-      State: ENABLED
-      #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-target.html
-      Targets:
-        - Arn: !GetAtt TestLambda.Arn
-          Id: !Ref TestLambda
-          Input: !Sub '{"service_type":"${ServiceType}", "slack_channel":"ALARM"}'
-  ##########################################################################
-  #   AWS::Lambda::Permission
-  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
-  ##########################################################################
-  PermissionForEventsToInvokeLambda: 
-    Type: AWS::Lambda::Permission
-    Properties: 
-      FunctionName: !Ref TestLambda
-      Action: "lambda:InvokeFunction"
-      Principal: "events.amazonaws.com"
-      SourceArn: !GetAtt EventBridgeScheduleRule.Arn
 ##########################################################################
   #   AWS::CloudWatch::Alarm
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
