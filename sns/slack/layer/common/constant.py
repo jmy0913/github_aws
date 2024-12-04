@@ -34,6 +34,25 @@ class MESSAGE_BLOCKS(enum.Enum):
       }
     }
   ], "서비스 메세지")
+  SUB_MSG = (enum.auto(), [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "{service_nm}의 쓰레드 메세지입니다."
+			},
+			"accessory": {
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": "google 접속"
+				},
+				"value": "click_me",
+				"url": "https://google.com",
+				"action_id": "button-action"
+			}
+		}
+	], "서비스 메세지의 쓰레드 메세지")
   ERROR = (enum.auto(), [
     {
       "type": "section",

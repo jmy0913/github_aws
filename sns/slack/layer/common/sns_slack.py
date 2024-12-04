@@ -70,6 +70,22 @@ class slack_alarm:
     self.thread_ts = self.__send_message(p_message_blocks=message)['ts']
     return self.thread_ts
 
+
+  def send_sub_message(self, p_service_type:SERVICE_TYPE):
+    if not isinstance(p_service_type, SERVICE_TYPE):
+      logging.error("[slack_alarm][send_sub_message] error of p_service_type")
+      return 
+    elif not self.thread_ts:
+      logging.error("[slack_alarm][send_sub_message] no thread_ts")
+      return
+    
+    message = copy.deepcopy(MESSAGE_BLOCKS.SERVICE.value[1])
+    message[0]['text']['text'] = message[0]['text']['text'].format(service_nm=p_service_type.name)
+
+    self.thread_ts = self.__send_message(p_message_blocks=message, p_thread_ts=self.thread_ts)['ts']
+    return self.thread_ts
+
+
   def send_error_message():
     pass
 

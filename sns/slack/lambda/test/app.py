@@ -26,6 +26,8 @@ def lambda_handler(event:dict, context:str) -> None:
   service = SERVICE_TYPE[service_type]
   if not slack.get_ts_of_service_message(p_service_nm=service.name):
     logging.info("send message to slack!!")
-    slack.send_service_message(p_service_type=service) 
+    slack.send_service_message(p_service_type=service)
+  else:
+    slack.send_sub_message(p_service_type=service)
 
   logging.info("lambda_handler END")
