@@ -49,7 +49,7 @@ Resources:
     Properties:
       CompatibleRuntimes:
         - !Sub ${PythonVersion}
-      ContentUri: common
+      ContentUri: layer
       Description: Provides the base backend shared library and dependencies
       LayerName: !Sub ${ServiceType}-${DefaultName}-shared-layer
     Metadata:
