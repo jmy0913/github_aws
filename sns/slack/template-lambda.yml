@@ -66,7 +66,7 @@ Resources:
     Properties:
       FunctionName:  !Sub ${ServiceType}-${DefaultName}-alarm-lambda
       Role: !GetAtt LambdaRole.Arn
-      CodeUri: alarm
+      CodeUri: lambda/alarm
       Handler: app.lambda_handler
       Tags:
         Name: !Sub ${ServiceType}-${DefaultName}-alarm-lambda
@@ -81,7 +81,7 @@ Resources:
     Properties:
       FunctionName:  !Sub ${ServiceType}-${DefaultName}-test-lambda
       Role: !GetAtt LambdaRole.Arn
-      CodeUri: test
+      CodeUri: lambda/test
       Handler: app.lambda_handler
       Tags:
         Name: !Sub ${ServiceType}-${DefaultName}-test-lambda
