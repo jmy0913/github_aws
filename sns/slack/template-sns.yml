@@ -13,7 +13,7 @@ Parameters:
     Default: sns-slack
   ServiceType:
     Type: String
-    Default: tutorial
+    Default: DEV
   PythonVersion:
     Type: String
     Default: python3.11
@@ -142,7 +142,7 @@ Resources:
       Targets:
         - Arn: !GetAtt TestLambda.Arn
           Id: !Ref TestLambda
-          Input: !Sub '{"service_type":"${ServiceType}"}'
+          Input: !Sub '{"service_type":"${ServiceType}", "slack_channel":"ALARM"}'
   ##########################################################################
   #   AWS::Lambda::Permission
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html

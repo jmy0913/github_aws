@@ -4,8 +4,8 @@ from venv import logger
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-from common.utils import init_alarm
-from common.constant import SLACK_CHANNELS
+from layer.common.utils import init_alarm
+from layer.common.constant import SLACK_CHANNELS
 
 init_alarm()
 

@@ -3,7 +3,7 @@ import os
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 
-from common.utils import init_event
+from layer.common.utils import init_event
 
 
 init_event()
@@ -29,7 +29,7 @@ def message_hello(message, say):
         "type": "section",
         "text": {
           "type": "mrkdwn", 
-          "text": f"Hey there <@{message['user']}>!"
+          "text": f"Hi~ <@{message['user']}>!"
         },
         "accessory": {
           "type": "button",
