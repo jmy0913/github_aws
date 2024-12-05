@@ -12,5 +12,7 @@ def lambda_handler(event:dict, context:str) -> None:
   logging.info("lambda_handler!!")
   logging.info(f"event: {str(event)}")
 
-
+  slack = slack_alarm(p_slack_channel=SLACK_CHANNELS.ERROR)
+  logging.info("create a slack")
   
+  return event 
