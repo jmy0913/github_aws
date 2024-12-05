@@ -122,7 +122,6 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref LambdaRole
-
 ##########################################################################
   #   AWS::CloudWatch::Alarm
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
