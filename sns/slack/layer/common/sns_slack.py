@@ -86,8 +86,17 @@ class slack_alarm:
     return self.thread_ts
 
 
-  def send_error_message():
-    pass
+  def send_error_message(self, p_lambda_nm:str, p_error_msg:str):
+    if not self.thread_ts:
+      logging.error("[slack_alarm][send_sub_message] no thread_ts")
+      return
+    
+    message = copy.deepcopy(MESSAGE_BLOCKS.SERVICE.value[1])
+    message[0]['text']['text'] = message[0]['text']['text'].format(error_msg=p_error_msg)
 
+    aws_log_link_url = f"https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/$252Faws$252Flambda$252F{p_lambda_nm}"
+    message[0]['accessory']['url'] = message[0]['accessory']['url'].format(aws_log_link_url=aws_log_link_url)
 
+    self.thread_ts = self.__send_message(p_message_blocks=message, p_thread_ts=self.thread_ts)['ts']
+    return self.thread_ts
 

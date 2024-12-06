@@ -54,13 +54,23 @@ class MESSAGE_BLOCKS(enum.Enum):
 		}
 	], "서비스 메세지의 쓰레드 메세지")
   ERROR = (enum.auto(), [
-    {
-      "type": "section",
-      "text": {
-        "type": "mrkdwn",
-        "text": "{error_msg}"
-      }
-    }
-  ], "오류 메세지")
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Error Message*\n{error_msg}"
+			},
+			"accessory": {
+				"type": "button",
+				"text": {
+					"type": "plain_text",
+					"text": "AWS Log"
+				},
+				"value": "aws_log_link",
+				"url": "{aws_log_link_url}",
+				"action_id": "button-action"
+			}
+		}
+	], "오류 메세지")
 
 
