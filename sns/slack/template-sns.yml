@@ -171,37 +171,12 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: sns.amazonaws.com # Allow SNS Notifications
       SourceArn: !Ref SlackTopic
-  # ##########################################################################
-  # #   AWS::Logs::LogGroup
-  # #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
-  # ##########################################################################
-  # TestLambdaLogGroup:
-  #   Type: AWS::Logs::LogGroup
-  #   Properties:
-  #     LogGroupName: !Sub /aws/lambda/${TestLambda} # Lambda name 바탕 로그 그룹 생성
-  #     RetentionInDays: 30 #  로그 그룹 유지 기간
-  # ##########################################################################
-  # #   AWS::Lambda::Permission
-  # #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
-  # #   슬랙 람다에 트리거 적용 > LogGroup에 접속 권한 부여
-  # ##########################################################################
-  # TestLambdaLogGroupPermission:
-  #   Type: AWS::Lambda::Permission
-  #   Properties:
-  #     FunctionName: !Ref SubscriptionLambda
-  #     Action: "lambda:InvokeFunction"
-  #     Principal: !Sub "logs.${AWS::Region}.amazonaws.com"
-  #     SourceArn: !GetAtt TestLambdaLogGroup.Arn
-  #     SourceAccount: !Sub ${AWS::AccountId}
-  # ##########################################################################
-  # #   AWS::Logs::SubscriptionFilter
-  # #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
-  # #   실시간 서비스 오류 알림을 처리하기에는 적합
-  # ##########################################################################
-  # TestLambdaLogGroupSubscriptionFilter:
-  #   Type: AWS::Logs::SubscriptionFilter
-  #   Properties:
-  #     DestinationArn: !GetAtt SlackTopic.Arn
-  #     FilterPattern: ERROR # define Subscription Filter pattern
-  #     LogGroupName: !Ref TestLambdaLogGroup
-
+  ##########################################################################
+  #   AWS::Logs::LogGroup
+  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+  ##########################################################################
+  TestLambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${TestLambda} # Lambda name 바탕 로그 그룹 생성
+      RetentionInDays: 30 #  로그 그룹 유지 기간
