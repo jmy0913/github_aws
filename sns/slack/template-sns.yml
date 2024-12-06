@@ -122,31 +122,6 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref LambdaRole
-##########################################################################
-  #   AWS::CloudWatch::Alarm
-  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
-  #   실시간 서비스 오류 알림을 처리하기에는 부적합
-  #   인프라 측면에서 요금/자원/보안 등의 알림 설정으로는 적합
-  ##########################################################################
-  PublisherAlarm:
-    Type: AWS::CloudWatch::Alarm
-    Properties:
-      AlarmName: !Sub ${ServiceType}-${DefaultName}-Alarm
-      AlarmDescription: "Error occurring alarm and send it to sns if greater than zero"
-      AlarmActions:
-        - !Ref SlackTopic
-      ComparisonOperator: GreaterThanThreshold
-      Dimensions:
-        - Name: FunctionName
-          Value: !Ref TestLambda
-        - Name: Resource
-          Value: !GetAtt TestLambda.Arn
-      EvaluationPeriods: 1
-      MetricName: Errors
-      Namespace: AWS/Lambda
-      Period: 60
-      Statistic: Sum
-      Threshold: 0
   ##########################################################################
   #   AWS::SNS::Topic
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
@@ -171,6 +146,33 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: sns.amazonaws.com # Allow SNS Notifications
       SourceArn: !Ref SlackTopic
+  ##########################################################################
+  #   AWS::CloudWatch::Alarm
+  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
+  #   실시간 서비스 오류 알림을 처리하기에는 부적합
+  #   인프라 측면에서 요금/자원/보안 등의 알림 설정으로는 적합
+  ##########################################################################
+  PublisherAlarm:
+    Type: AWS::CloudWatch::Alarm
+    DependsOn: 
+      - SlackTopic
+    Properties:
+      AlarmName: !Sub ${ServiceType}-${DefaultName}-Alarm
+      AlarmDescription: "Error occurring alarm and send it to sns if greater than zero"
+      AlarmActions:
+        - !Ref SlackTopic
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref TestLambda
+        - Name: Resource
+          Value: !GetAtt TestLambda.Arn
+      EvaluationPeriods: 1
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Period: 60
+      Statistic: Sum
+      Threshold: 0
   ##########################################################################
   #   AWS::Logs::LogGroup
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
