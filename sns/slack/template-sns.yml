@@ -59,7 +59,7 @@ Resources:
   #   https://docs.aws.amazon.com/ko_kr/serverless-application-model/latest/developerguide/sam-resource-function.html
   #   AWS 알람 람다 
   ##########################################################################
-  SubscriptionLambda:
+  SlackAlarmLambda:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName:  !Sub ${ServiceType}-${DefaultName}-alarm-lambda
@@ -134,13 +134,23 @@ Resources:
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
   ##########################################################################
   SlackTopic:
-    Type: AWS::SNS::Topic
+    Type: AWS::SNS::Topic 
     Properties:
       DisplayName: !Sub ${ServiceType}-${DefaultName}-topic
       TopicName: !Sub ${ServiceType}-${DefaultName}-topic
-      Subscription:
-        - Endpoint: !GetAtt SubscriptionLambda.Arn
-          Protocol: lambda
+      # Subscription:
+      #   - Endpoint: !GetAtt SlackAlarmLambda.Arn
+      #     Protocol: lambda
+  ##########################################################################
+  #   AWS::SNS::Subscription
+  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
+  ##########################################################################
+  SubscriptionLambda:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: !GetAtt SlackAlarmLambda.Arn
+      Protocol: lambda
+      TopicArn: !Ref SlackTopic
   ##########################################################################
   #   AWS::Lambda::Permission
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
@@ -149,7 +159,7 @@ Resources:
   AicoSlackBaseTopicPermission:
     Type: AWS::Lambda::Permission
     Properties:
-      FunctionName: !Ref SubscriptionLambda
+      FunctionName: !Ref SlackAlarmLambda
       Action: lambda:InvokeFunction
       Principal: sns.amazonaws.com # Allow SNS Notifications
       SourceArn: !Ref SlackTopic
@@ -182,10 +192,10 @@ Resources:
   #   AWS::Logs::LogGroup
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
   ##########################################################################
-  SubscriptionLambdaaLogGroup:
+  SlackAlarmLambdaaLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub /aws/lambda/${SubscriptionLambda} # Lambda name 바탕 로그 그룹 생성
+      LogGroupName: !Sub /aws/lambda/${SlackAlarmLambda} # Lambda name 바탕 로그 그룹 생성
       RetentionInDays: 30 #  로그 그룹 유지 기간
   ##########################################################################
   #   AWS::Logs::LogGroup

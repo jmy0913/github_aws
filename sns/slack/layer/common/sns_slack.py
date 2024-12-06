@@ -91,7 +91,7 @@ class slack_alarm:
       logging.error("[slack_alarm][send_sub_message] no thread_ts")
       return
     
-    message = copy.deepcopy(MESSAGE_BLOCKS.SERVICE.value[1])
+    message = copy.deepcopy(MESSAGE_BLOCKS.ERROR.value[1])
     message[0]['text']['text'] = message[0]['text']['text'].format(error_msg=p_error_msg)
 
     aws_log_link_url = f"https://ap-northeast-2.console.aws.amazon.com/cloudwatch/home?region=ap-northeast-2#logsV2:log-groups/log-group/$252Faws$252Flambda$252F{p_lambda_nm}"
