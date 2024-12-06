@@ -165,8 +165,6 @@ Resources:
       Dimensions:
         - Name: FunctionName
           Value: !Ref TestLambda
-        - Name: Resource
-          Value: !GetAtt TestLambda.Arn
       EvaluationPeriods: 1
       MetricName: Errors
       Namespace: AWS/Lambda
