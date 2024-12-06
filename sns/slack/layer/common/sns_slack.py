@@ -79,7 +79,7 @@ class slack_alarm:
       logging.error("[slack_alarm][send_sub_message] no thread_ts")
       return
     
-    message = copy.deepcopy(MESSAGE_BLOCKS.SERVICE.value[1])
+    message = copy.deepcopy(MESSAGE_BLOCKS.SUB_MSG.value[1])
     message[0]['text']['text'] = message[0]['text']['text'].format(service_nm=p_service_type.name)
 
     self.thread_ts = self.__send_message(p_message_blocks=message, p_thread_ts=self.thread_ts)['ts']
