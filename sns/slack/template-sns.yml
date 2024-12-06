@@ -134,7 +134,7 @@ Resources:
       AlarmName: !Sub ${ServiceType}-${DefaultName}-Alarm
       AlarmDescription: "Error occurring alarm and send it to sns if greater than zero"
       AlarmActions:
-        - !GetAtt SlackTopic.Arn
+        - !Ref SlackTopic
       ComparisonOperator: GreaterThanThreshold
       Dimensions:
         - Name: FunctionName
