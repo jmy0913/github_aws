@@ -13,8 +13,8 @@ def lambda_handler(event:dict, context:str) -> None:
   service_type = event.get('service_type', None)
   slack_channel = event.get('slack_channel', None)
 
-  assert not service_type or not service_type in SERVICE_TYPE.__members__, f"[lambda_handler] error of service_type: {service_type}"
-  assert not slack_channel or not slack_channel in SLACK_CHANNELS.__members__, f"[lambda_handler] error of slack_channel: {slack_channel}"
+  assert service_type in SERVICE_TYPE.__members__, f"[lambda_handler] error of service_type: {service_type}"
+  assert slack_channel in SLACK_CHANNELS.__members__, f"[lambda_handler] error of slack_channel: {slack_channel}"
   
   slack = slack_alarm(p_slack_channel=SLACK_CHANNELS[slack_channel])
   logging.info("create a slack")
