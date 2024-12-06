@@ -120,6 +120,13 @@ Resources:
               "ssm:GetParameter"
             ]
             Resource: "*"
+          - Effect: "Allow"
+            Action: [
+              "logs:CreateLogGroup",
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ]
+            Resource: "*"
       Roles:
         - !Ref LambdaRole
   ##########################################################################
@@ -171,6 +178,15 @@ Resources:
       Period: 60
       Statistic: Sum
       Threshold: 0
+  ##########################################################################
+  #   AWS::Logs::LogGroup
+  #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+  ##########################################################################
+  SubscriptionLambdaaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${SubscriptionLambda} # Lambda name 바탕 로그 그룹 생성
+      RetentionInDays: 30 #  로그 그룹 유지 기간
   ##########################################################################
   #   AWS::Logs::LogGroup
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
