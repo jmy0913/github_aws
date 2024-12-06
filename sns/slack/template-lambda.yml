@@ -105,5 +105,12 @@ Resources:
               "ssm:GetParameter"
             ]
             Resource: "*"
+          - Effect: "Allow"
+            Action: [
+              "logs:CreateLogGroup",
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ]
+            Resource: "*"
       Roles:
         - !Ref LambdaRole
