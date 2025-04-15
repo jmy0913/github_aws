@@ -13,7 +13,7 @@ def lambda_handler(event:dict, context:str) -> None:
   logging.info("lambda_handler START")
   path_csv = mk_path_csv_of_s3("lambda_test")
   path_csv = "raw/"+path_csv
-  bucket_name = "생성한 bucket명"
+  bucket_name = "lambda-good593"
 
   upload_csv_to_s3(data=pd.DataFrame([event])
                     , bucket=bucket_name, path=path_csv)

@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: |
-  Lambda Sample Template 
+  Lambda Sample Template
 ##########################################################################
 #   Parameters
 #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html
@@ -61,13 +61,15 @@ Resources:
   TestLambda:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName:  !Sub ${ServiceType}-${DefaultName}
+      FunctionName: !Sub ${ServiceType}-${DefaultName}
       Role: !GetAtt LambdaRole.Arn
       CodeUri: src
       Handler: app.lambda_handler
       Tags:
         Name: !Sub ${ServiceType}-${DefaultName}
         Service: !Sub ${ServiceType}
+      Layers:
+        - !Ref SharedLayer
   ##########################################################################
   #   AWS::IAM::Role
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
@@ -78,14 +80,14 @@ Resources:
     Properties:
       RoleName: !Sub ${ServiceType}-${DefaultName}-role
       AssumeRolePolicyDocument:
-        Version: "2012-10-17"
+        Version: '2012-10-17'
         Statement:
-          - Effect: "Allow"
+          - Effect: Allow
             Principal:
               Service:
-                - "lambda.amazonaws.com"
+                - lambda.amazonaws.com
             Action:
-              - "sts:AssumeRole"
+              - sts:AssumeRole
   ##########################################################################
   #   AWS::IAM::Policy
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
@@ -96,25 +98,23 @@ Resources:
     Properties:
       PolicyName: !Sub ${ServiceType}-${DefaultName}-policy
       PolicyDocument:
-        Version: "2012-10-17"
+        Version: '2012-10-17'
         Statement:
-          - Effect: "Allow"
-            Action: [
-              "s3:PutObject",
-              "s3:GetObject",
-              "s3:AbortMultipartUpload",
-              "s3:ListBucket",
-              "s3:DeleteObject",
-              "s3:GetObjectVersion",
-              "s3:ListMultipartUploadParts"
-            ]
-            Resource: "*"
-          - Effect: "Allow"
-            Action: [
-              "logs:CreateLogGroup",
-              "logs:CreateLogStream",
-              "logs:PutLogEvents"
-            ]
-            Resource: "*"
+          - Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+              - s3:AbortMultipartUpload
+              - s3:ListBucket
+              - s3:DeleteObject
+              - s3:GetObjectVersion
+              - s3:ListMultipartUploadParts
+            Resource: '*'
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: '*'
       Roles:
         - !Ref LambdaRole
