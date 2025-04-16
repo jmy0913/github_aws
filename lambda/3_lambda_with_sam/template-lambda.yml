@@ -68,8 +68,6 @@ Resources:
       Tags:
         Name: !Sub ${ServiceType}-${DefaultName}
         Service: !Sub ${ServiceType}
-      Layers:
-        - !Ref SharedLayer
   ##########################################################################
   #   AWS::IAM::Role
   #   https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
