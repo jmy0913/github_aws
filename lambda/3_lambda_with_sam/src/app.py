@@ -15,7 +15,7 @@ def lambda_handler(event:dict, context:str) -> None:
   path_csv = "raw/"+path_csv
   bucket_name = "lambda-good593"
 
-  upload_csv_to_s3(data=pd.DataFrame([event])
+  upload_csv_to_s3(df=pd.DataFrame([event])
                     , bucket=bucket_name, path=path_csv)
   return {
     'statusCode': 200,
