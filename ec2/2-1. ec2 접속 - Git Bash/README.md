@@ -60,7 +60,7 @@ chmod 600 ~/identity/hello-ec2-keypair.pem
 ssh-keygen -t rsa
 # enter 세 번 탁! 탁! 탁!
 ```
-![alt text](./img/image-6.png)
+![bg right w:600](./img/image-6.png)
 
 ---
 ### 단계8: ssh config 생성

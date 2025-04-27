@@ -26,7 +26,7 @@ paginate: true
 ### 단계4: Application and OS Images
 > 생성될 인스턴스에 설치될 OS
 
-![w:1000](./img/image-3.png)
+![w:900](./img/image-3.png)
 
 ---
 - select Ubuntu Server 
