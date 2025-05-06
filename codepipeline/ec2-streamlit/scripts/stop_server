@@ -1,2 +1,0 @@
-#!/bin/bash
-kill -9 `ps -ef|grep streamlit|awk '{print $2}'`
