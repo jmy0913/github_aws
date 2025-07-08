@@ -27,9 +27,7 @@ paginate: true
 ---
 ### 단계2: Springboot 테스트 
 ```shell
-http://localhost:8080/api/v1/hello
-
-http://localhost:8080/api/v1/message/goodjob!!!
+http://localhost:8080/hello
 ```
 ![alt text](./img/image-1.png)
 
@@ -40,7 +38,7 @@ http://localhost:8080/api/v1/message/goodjob!!!
 ---
 ### 단계4: docker build 테스트 
 ```shell
-docker build -f ./aws/ecs-springboot/Dockerfile -t ecs-springboot:latest .
+docker build -f ./Dockerfile -t ecs-springboot:latest .
 docker images
 ```
 ![alt text](./img/image-3.png)

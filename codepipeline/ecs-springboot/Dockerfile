@@ -1,22 +1,22 @@
-FROM gradle:7.6-jdk17-alpine as build
+FROM gradle:8.1.1-jdk17-alpine as build
 
 ENV APP_HOME=/apps
 
 WORKDIR $APP_HOME
 
-COPY ./aws/ecs-springboot/build.gradle ./aws/ecs-springboot/settings.gradle ./aws/ecs-springboot/gradlew $APP_HOME
+COPY build.gradle settings.gradle gradlew $APP_HOME/
 
-COPY ./aws/ecs-springboot/gradle $APP_HOME/gradle
+COPY gradle $APP_HOME/gradle
 
 RUN chmod +x gradlew
 
 RUN ./gradlew build || return 0
 
-COPY ./aws/ecs-springboot/src $APP_HOME/src
+COPY src $APP_HOME/src
 
 RUN ./gradlew clean build
 
-FROM openjdk:17.0.2-jdk
+FROM openjdk:17-jdk-slim
 
 ENV APP_HOME=/apps
 ARG ARTIFACT_NAME=app.jar
@@ -29,5 +29,5 @@ COPY --from=build $APP_HOME/$JAR_FILE_PATH $ARTIFACT_NAME
 
 EXPOSE 8080
 
-#ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
