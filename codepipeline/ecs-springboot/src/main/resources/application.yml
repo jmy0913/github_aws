@@ -18,3 +18,17 @@ spring:
     suffix: .mustache
     cache: false
 
+# Spring Boot Actuator 설정 (Health Check)
+management:
+  endpoints:
+    web:
+      exposure:
+        # health 엔드포인트를 웹에 노출
+        include: health
+      base-path: /
+  endpoint:
+    health:
+      # 상세한 health 정보 표시 (UP/DOWN 외에 디스크, 데이터베이스 등 세부 정보)
+      show-details: always
+      # health 체크가 활성화됨
+      enabled: true
